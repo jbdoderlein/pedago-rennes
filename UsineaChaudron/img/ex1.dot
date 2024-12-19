@@ -1,0 +1,17 @@
+digraph G {
+    # default shape : box
+    node [shape=box];
+    START;
+    a[label="A", shape=diamond];
+    b[label="A+=B"]
+    c[label="A", shape=diamond];
+    end1[label="END 1"]
+    end2[label="END 2"]
+    end3[label="END 3"]
+    START -> a;
+    a -> b[label="≠ 1"];
+    a -> end1[label="= 1"];
+    b -> c;
+    c -> end2[label="≠ 1"];
+    c -> end3[label="= 1"];
+}

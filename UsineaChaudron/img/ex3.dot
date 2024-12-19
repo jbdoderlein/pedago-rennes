@@ -1,0 +1,51 @@
+digraph G {
+    node [shape=box, ordering=out];
+    # make 9 invisible rank
+    { rank = same; START; }
+    { rank = same; decision1}
+    { rank = same; operation1; operation3;}
+    { rank = same; operation2;decision3;}
+    { rank = same; decision2; operation4;}
+    { rank = same; operation4; operation5; operation6; operation7; operation8;}
+    { rank = same; operation9}
+    { rank = same; decision4; end;}
+    { rank = same; operation10;}
+
+
+    START;
+    decision1[label="B", shape=diamond];
+    decision2[label="A", shape=diamond];
+    decision3[label="A", shape=diamond];
+    decision4[label="B", shape=diamond];
+    operation1[label="A+=2"];
+    operation2[label="C=A+B"];
+    operation3[label="C=A"];
+    operation4[label="C+=1"];
+    operation5[label="A+=1"];
+    operation6[label="B+=1"];
+    operation7[label="C-=2"];
+    operation8[label="A-=1"];
+    operation9[label="A=3"];
+    operation10[label="C+=A"];
+    end[label="END"];
+    START -> decision1;
+    decision1 -> operation3[label="= 4"];
+    decision1 -> operation1[label="≠ 4"];
+    operation1 -> operation2;
+    operation2 -> decision2;
+    operation3 -> decision3;
+    decision3 -> operation2[label="≠ B"];
+    decision3 -> operation4[label="= B"];
+    operation4 -> operation5;
+    operation5 -> operation6;
+    operation6 -> decision3;
+
+    decision2 -> operation7[label="≠ 0"];
+    operation7 -> operation8;
+    operation8 -> decision2;
+    decision2 -> operation9[label="= 0"];
+    operation9 -> decision4;
+    decision4 -> end[label="= A"];
+    decision4 -> operation10[label="≠ A"];
+    operation10 -> decision3;
+}
